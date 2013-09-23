@@ -82,6 +82,23 @@ namespace TDDStringCalc.Tests
             Assert.AreEqual(15, result);
 
 
+        } 
+        [TestMethod]
+        public void DelimiterWrappedwithBrackets()
+        {
+            var calculator = new StringCalculator();
+            var result = calculator.Add("//[***]\n1***2***3");
+
+            Assert.AreEqual(6, result);
+        }
+
+        [TestMethod]
+        public void DelimiterMultipleBrackets()
+        {
+            var calculator = new StringCalculator();
+            var result = calculator.Add("//[***][$$]\n1***2$$3");
+
+            Assert.AreEqual(6, result);
         }
 
     }

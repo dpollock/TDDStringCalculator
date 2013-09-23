@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 
 namespace TDDStringCalc.Tests
 {
@@ -13,17 +14,26 @@ namespace TDDStringCalc.Tests
                 return 0;
             }
 
-            var delimiters = new List<char> { ',', '\n' };
+            var delimiters = new List<string> { ",", "\n" };
             //strip off the first line if it starts with //
             if (numbers.StartsWith("//"))
             {
                 var firstLineBreak = numbers.IndexOf('\n');
-                var delimiter = numbers.Substring(2, 1);
-                delimiters.Add(delimiter.ToCharArray()[0]);
+                var possibleDelimiters = numbers.Substring(2, firstLineBreak - 2);
+                var list = new List<string>();
+                foreach (Match m in Regex.Matches(possibleDelimiters, @"\[(.*?)\]"))
+                {
+                    list.Add(m.Groups[1].Value);
+                    possibleDelimiters = possibleDelimiters.Replace(m.Groups[0].Value, "");
+                }
+                delimiters.AddRange(list);
+                if (possibleDelimiters.Length > 0)
+                    delimiters.Add(possibleDelimiters[0].ToString());
+
                 numbers = numbers.Substring(firstLineBreak + 1, numbers.Length - firstLineBreak - 1);
             }
 
-            var splitUp = numbers.Split(delimiters.ToArray());
+            var splitUp = numbers.Split(delimiters.ToArray(), StringSplitOptions.RemoveEmptyEntries);
             var sum = 0;
             var negativeNumbers = new List<int>();
             foreach (string s in splitUp)
