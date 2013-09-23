@@ -99,6 +99,15 @@ namespace TDDStringCalc.Tests
             var result = calculator.Add("//[***][$$]\n1***2$$3");
 
             Assert.AreEqual(6, result);
+        }  
+        
+        [TestMethod]
+        public void DelimiterMultipleBracketsScenerio2()
+        {
+            var calculator = new StringCalculator();
+            var result = calculator.Add("//[*][%]\n1*2%3");
+
+            Assert.AreEqual(6, result);
         }
 
     }
