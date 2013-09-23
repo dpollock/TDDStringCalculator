@@ -72,5 +72,17 @@ namespace TDDStringCalc.Tests
 
         }
 
+
+        [TestMethod]
+        public void DoesntAddNumbersLargerThan1000()
+        {
+            var calculator = new StringCalculator();
+            var result = calculator.Add("5,1005,10,67000");
+
+            Assert.AreEqual(15, result);
+
+
+        }
+
     }
 }

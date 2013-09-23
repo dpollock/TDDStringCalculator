@@ -33,6 +33,8 @@ namespace TDDStringCalc.Tests
                 {
                     negativeNumbers.Add(n);
                 }
+                if (n >= 1000)
+                    continue;
 
                 sum += n;
             }
