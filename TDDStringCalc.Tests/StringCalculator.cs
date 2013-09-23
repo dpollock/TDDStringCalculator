@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 
 namespace TDDStringCalc.Tests
@@ -12,7 +13,7 @@ namespace TDDStringCalc.Tests
                 return 0;
             }
 
-            var delimiters = new List<char> {',', '\n'};
+            var delimiters = new List<char> { ',', '\n' };
             //strip off the first line if it starts with //
             if (numbers.StartsWith("//"))
             {
@@ -23,7 +24,23 @@ namespace TDDStringCalc.Tests
             }
 
             var splitUp = numbers.Split(delimiters.ToArray());
-            var sum = splitUp.Sum(s => int.Parse(s));
+            var sum = 0;
+            var negativeNumbers = new List<int>();
+            foreach (string s in splitUp)
+            {
+                var n = int.Parse(s);
+                if (n < 0)
+                {
+                    negativeNumbers.Add(n);
+                }
+
+                sum += n;
+            }
+
+            if (negativeNumbers.Any())
+            {
+                throw new Exception(string.Format("Negative numbers not Allowed: {0}", negativeNumbers.Select(x => x.ToString()).Aggregate((a, b) => a + " " + b)));
+            }
 
             return sum;
         }

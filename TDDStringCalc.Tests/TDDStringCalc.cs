@@ -12,7 +12,7 @@ namespace TDDStringCalc.Tests
             var calculator = new StringCalculator();
             var result = calculator.Add(string.Empty);
 
-            Assert.AreEqual(0,result);
+            Assert.AreEqual(0, result);
 
         }
 
@@ -53,6 +53,23 @@ namespace TDDStringCalc.Tests
             var result = calculator.Add("//;\n1;2");
 
             Assert.AreEqual(3, result);
+        }
+
+        [TestMethod]
+        public void NegativeThrowsException()
+        {
+            try
+            {
+                var calculator = new StringCalculator();
+                var result = calculator.Add("-5,4,-2");
+                Assert.Fail("Didn't Catch negative numbers!");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("Negative numbers not Allowed: -5 -2", ex.Message);
+            }
+
+
         }
 
     }
