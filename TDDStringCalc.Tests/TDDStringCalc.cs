@@ -44,5 +44,16 @@ namespace TDDStringCalc.Tests
             Assert.AreEqual(12, result);
         }
 
+
+
+        [TestMethod]
+        public void HandlesCommentedFirstLine()
+        {
+            var calculator = new StringCalculator();
+            var result = calculator.Add("//;\n1;2");
+
+            Assert.AreEqual(3, result);
+        }
+
     }
 }
