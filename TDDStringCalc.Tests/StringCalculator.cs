@@ -1,10 +1,20 @@
-﻿namespace TDDStringCalc.Tests
+﻿using System.Linq;
+
+namespace TDDStringCalc.Tests
 {
     public class StringCalculator
     {
-        public int Add(string empty)
+        public int Add(string numbers)
         {
-            return 0;
+            if (string.IsNullOrWhiteSpace(numbers))
+            {
+                return 0;
+            }
+
+            var splitUp = numbers.Split(new[] {','});
+            var sum = splitUp.Sum(s => int.Parse(s));
+
+            return sum;
         }
     }
 }
