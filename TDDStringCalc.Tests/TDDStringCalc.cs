@@ -16,5 +16,25 @@ namespace TDDStringCalc.Tests
 
         }
 
+        [TestMethod]
+        public void OneNumberString()
+        {
+            var calculator = new StringCalculator();
+            var result = calculator.Add("5");
+
+            Assert.AreEqual(5, result);
+
+        }
+
+        [TestMethod]
+        public void TwoNumberString()
+        {
+            var calculator = new StringCalculator();
+            var result = calculator.Add("5,3");
+
+            Assert.AreEqual(8, result);
+
+        }
+
     }
 }
