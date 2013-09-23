@@ -33,7 +33,15 @@ namespace TDDStringCalc.Tests
             var result = calculator.Add("5,3");
 
             Assert.AreEqual(8, result);
+        }
 
+        [TestMethod]
+        public void HandlesNewLineAndCommaDelimiterString()
+        {
+            var calculator = new StringCalculator();
+            var result = calculator.Add("5,3\n4");
+
+            Assert.AreEqual(12, result);
         }
 
     }

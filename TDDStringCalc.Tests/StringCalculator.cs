@@ -11,7 +11,7 @@ namespace TDDStringCalc.Tests
                 return 0;
             }
 
-            var splitUp = numbers.Split(new[] {','});
+            var splitUp = numbers.Split(new[] {',','\n'});
             var sum = splitUp.Sum(s => int.Parse(s));
 
             return sum;
